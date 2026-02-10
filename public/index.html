@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Store</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div>
+          <h1>Mini Store</h1>
+          <p>Онлайн магазин для Telegram Mini App</p>
+        </div>
+        <div class="gender-switch">
+          <button class="toggle active" data-gender="male">Мужское</button>
+          <button class="toggle" data-gender="female">Женское</button>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2>Категории</h2>
+        <div id="categories" class="chips"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>Популярные товары</h2>
+          <button id="view-all" class="link">Показать всё</button>
+        </div>
+        <div id="popular" class="grid"></div>
+      </section>
+
+      <section class="section">
+        <h2>Товары</h2>
+        <div id="products" class="grid"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

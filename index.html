@@ -238,33 +238,29 @@
     }
 
     .contact-toast {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      width: min(520px, calc(100% - 2rem));
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #0d1930f2;
-      box-shadow: var(--shadow);
-      z-index: 999;
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: .2s ease;
-    }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%); /* немного выше центра при скрытии */
 
-    .contact-toast.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+  width: min(520px, calc(100% - 2rem));
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #0d1930f2;
+  box-shadow: var(--shadow);
+  z-index: 999;
 
-    .contact-toast p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin: 0.45rem 0;
-    }
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.contact-toast.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%); /* ровно по центру */
+  pointer-events: auto;
+}
 
     .social-buttons {
       display: flex;

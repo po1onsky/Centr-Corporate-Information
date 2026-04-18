@@ -515,21 +515,28 @@
     </div>
   </footer>
   <script>
-    const toast = document.getElementById('contact-toast');
+    const modalOverlay = document.getElementById('contact-modal-overlay');
+    const closeModalButton = document.getElementById('close-modal');
     const triggers = document.querySelectorAll('.js-contact-trigger');
-    let toastTimer;
 
-    const showToast = () => {
-      toast.classList.add('visible');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('visible'), 8000);
-    };
+    const openModal = () => modalOverlay.classList.add('visible');
+    const closeModal = () => modalOverlay.classList.remove('visible');
 
     triggers.forEach((button) => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
-        showToast();
+        openModal();
       });
+    });
+
+    closeModalButton.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', (event) => {
+      if (event.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
     });
   </script>
 </body>

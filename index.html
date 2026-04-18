@@ -237,33 +237,62 @@
       background: linear-gradient(160deg, rgba(29, 120, 255, 0.2), rgba(5, 12, 26, 0.6));
     }
 
-    .contact-toast {
+.contact-modal-overlay {
       position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      width: min(520px, calc(100% - 2rem));
+      inset: 0;
+      display: grid;
+      place-items: center;
       padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #0d1930f2;
-      box-shadow: var(--shadow);
+      background: rgba(5, 10, 24, 0.55);
+      backdrop-filter: blur(6px);
       z-index: 999;
       opacity: 0;
-      transform: translateY(10px);
       pointer-events: none;
-      transition: .2s ease;
+      transition: opacity .25s ease;
     }
 
-    .contact-toast.visible {
+    .contact-modal-overlay.visible {
       opacity: 1;
-      transform: translateY(0);
       pointer-events: auto;
     }
 
-    .contact-toast p {
+    .contact-modal {
+      position: relative;
+      width: min(560px, 100%);
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #0d1930f2;
+      box-shadow: var(--shadow);
+      transform: translateY(10px) scale(0.98);
+      transition: transform .25s ease, opacity .25s ease;
+      opacity: 0;
+    }
+
+    .contact-modal-overlay.visible .contact-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .contact-modal p {
       color: var(--muted);
       font-size: 0.95rem;
       margin: 0.45rem 0;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
     }
 
     .social-buttons {
@@ -461,7 +490,9 @@
     </section>
   </main>
 
-  <aside class="contact-toast" id="contact-toast" aria-live="polite">
+    <aside class="contact-modal-overlay" id="contact-modal-overlay" aria-live="polite">
+    <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-label="Контакты для связи">
+      <button class="close-modal" id="close-modal" aria-label="Закрыть окно">✕</button>
     <strong>Свяжитесь с нами для проверки документа</strong>
     <p>📞 <a href="tel:+79164932393">+7 (916) 493-23-93</a></p>
     <p>✉️ Напишите на почту: <a href="mailto:polyakovdn2403@ya.ru">polyakovdn2403@ya.ru</a></p>

@@ -423,8 +423,8 @@
         аудите и сделках.
       </p>
       <div class="actions">
-        <a class="btn primary js-contact-trigger" href="#!">Проверить документ</a>
-        <a class="btn secondary js-contact-trigger" href="#!">Оставить заявку</a>
+        <a class="btn primary js-start-check-trigger" href="#!">Проверить документ</a>
+        <a class="btn secondary js-leave-request-trigger" href="#!">Оставить заявку</a>
       </div>
     </div>
   </header>
@@ -441,7 +441,7 @@
         Наша миссия — сделать цифровое взаимодействие юридически надежным, безопасным и прозрачным.
         В основе решения лежат электронная подпись, криптографическое хеширование и механизмы контроля целостности данных.
       </p>
-      <p>
+      <p class="lead">
         Мы отвечаем на ключевые вопросы пользователей: что такое электронная подпись, как проверить подлинность документа,
         как доказать подлинность файла и как защитить данные от подделки.
       </p>
@@ -467,11 +467,11 @@
         <span class="tag">Как это работает</span>
         <h2>5 шагов до проверяемого цифрового доказательства</h2>
         <div class="steps">
-          <div class="step"><div><h3>Оставить заявку</h3><p>Указываете, что нужно заверить: переписку в мессенджере, сайт, скриншоты или данные из приложения.</p></div></div>
-          <div class="step"><div><h3>Фиксация данных</h3><p>Делаем правильные скриншоты, сохраняем переписку и всю важную информацию с датой и временем.</p></div></div>
-          <div class="step"><div><h3>Сохранение доказательств</h3><p>Фиксируем данные так, чтобы их нельзя было подделать или изменить.</p></div></div>
-          <div class="step"><div><h3>Проверка и оформление</h3><p>Анализируем информацию и подготавливаем её в юридически корректном виде.</p></div></div>
-          <div class="step"><div><h3>Получение документов</h3><p>Выдаем заключение, которое можно использовать как доказательство в суде или споре.</p></div></div>
+          <div class="step"><div><h3>Оставить заявку</h3><p>Указываете, что нужно: заверить переписку в Telegram или WhatsApp, зафиксировать скриншоты для суда, сохранить страницу сайта или данные из приложения.</p></div></div>
+          <div class="step"><div><h3>Фиксация данных</h3><p>Проводим фиксацию переписки, делаем корректные скриншоты с датой и временем, сохраняем сообщения, файлы и структуру данных.</p></div></div>
+          <div class="step"><div><h3>Сохранение доказательств</h3><p>Фиксируем информацию так, чтобы она соответствовала требованиям: доказательства без изменений, защита от подделки, сохранение оригинального состояния данных.</p></div></div>
+          <div class="step"><div><h3>Проверка и оформление</h3><p>Подготавливаем материалы как цифровые доказательства, оформляем заключение специалиста, соответствующее требованиям суда.</p></div></div>
+          <div class="step"><div><h3>Получение документов</h3><p>Вы получаете документ, который можно использовать как: доказательство переписки в суде, подтверждение фактов, заверенные скриншоты и переписку.</p></div></div>
         </div>
       </div>
     </section>
@@ -480,11 +480,11 @@
       <div class="container">
         <span class="tag">Преимущества</span>
         <div class="grid cols-5">
-          <article class="card"><h3>Юридическая значимость</h3><p>Поддержка требований электронного документооборота и доказательной силы в спорах.</p></article>
-          <article class="card"><h3>Высокий уровень безопасности</h3><p>Современная криптография, контроль доступа и защищенная инфраструктура.</p></article>
-          <article class="card"><h3>Быстрая обработка</h3><p>Автоматизация процессов позволяет заверять документы за минуты, а не дни.</p></article>
-          <article class="card"><h3>Прозрачность</h3><p>Полная трассировка операций и аудиторский след для внутренних и внешних проверок.</p></article>
-          <article class="card"><h3>Соответствие стандартам</h3><p>Процессы выстроены с учетом eIDAS-подхода и отраслевых требований комплаенса.</p></article>
+          <article class="card"><h3>Юридическая значимость</h3><p>Вы получаете заключение специалиста, которое подходит как доказательство переписки в суде и соответствует требованиям законодательства.</p></article>
+          <article class="card"><h3>Работаем с любыми источниками</h3><p>Заверяем переписку Telegram, WhatsApp, фиксируем сайты, приложения, личные кабинеты и скриншоты — всё, что может понадобиться как цифровое доказательство.</p></article>
+          <article class="card"><h3>Гарантия достоверности данных</h3><p>Проводим фиксацию информации без изменений: сохраняем дату, время, структуру данных и исключаем возможность подделки.</p></article>
+          <article class="card"><h3>Профессиональный подход</h3><p>Используем методы цифровой криминалистики и технической фиксации, как в официальных исследованиях</p></article>
+          <article class="card"><h3>Подходит для любых ситуаций</h3><p>Наши материалы используют для: судебных споров, разбирательств с работодателем, возврата денег, доказательства переписки и договорённостей.</p></article>
         </div>
       </div>
     </section>
@@ -550,30 +550,38 @@
         <div class="cta">
           <h2>Начните защищать цифровые документы уже сегодня</h2>
           <p class="lead" style="margin: 0.7rem auto 1.1rem;">Зарегистрируйтесь и получите первый сертификат подлинности для ключевого документа вашей компании.</p>
-          <a class="btn primary js-contact-trigger" href="#!">Начать проверку</a>
+          <a class="btn primary js-start-check-trigger" href="#!">Начать проверку</a>
         </div>
       </div>
     </section>
   </main>
 
-    <aside class="contact-modal-overlay" id="contact-modal-overlay" aria-live="polite">
-    <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-label="Контакты для связи">
-      <button class="close-modal" id="close-modal" aria-label="Закрыть окно">✕</button>
-    <strong>Свяжитесь с нами для проверки документа</strong>
+ <aside class="contact-modal-overlay" id="contact-modal-overlay" aria-live="polite">
+    <div class="contact-modal" role="dialog" aria-modal="true" aria-label="Контакты для связи">
+      <button class="close-modal" data-close-modal="contact" aria-label="Закрыть окно">✕</button>
+      <strong>Свяжитесь с нами для проверки документа</strong>
+      <p>📞 <a href="tel:+79164932393">+7 (916) 493-23-93</a></p>
+      <p>✉️ Напишите на почту: <a href="mailto:polyakovdn2403@ya.ru">polyakovdn2403@ya.ru</a></p>
+      <div class="social-buttons">
+        <a href="#" aria-label="Telegram (ссылка будет добавлена позже)">Telegram</a>
+        <a href="#" aria-label="WhatsApp (ссылка будет добавлена позже)">WhatsApp</a>
+        <a href="#" aria-label="VK (ссылка будет добавлена позже)">VK</a>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="contact-modal-overlay" id="request-modal-overlay" aria-live="polite">
+    <div class="contact-modal" role="dialog" aria-modal="true" aria-label="Форма заявки">
+      <button class="close-modal" data-close-modal="request" aria-label="Закрыть окно">✕</button>
+      <strong>Оставьте заявку</strong>
       <form class="lead-form" action="https://formspree.io/f/xvzdqnkv" method="POST">
         <input type="text" name="name" placeholder="Ваше имя" required />
-        <input type="email" name="email" placeholder="Почта/Телефон" required />
+        <input type="email" name="email" placeholder="Телефон / Почта" required />
         <input type="text" name="company" placeholder="Компания" />
         <textarea name="message" placeholder="Кратко опишите ваш запрос" required></textarea>
         <button type="submit" class="btn primary">Отправить заявку</button>
         <div id="form-status" class="form-status" aria-live="polite"></div>
       </form>
-    <p>📞 <a href="tel:+79164932393">+7 (916) 493-23-93</a></p>
-    <p>✉️ Напишите на почту: <a href="mailto:fond.cki@mail.ru">fond.cki@mail.ru</a></p>
-    <div class="social-buttons">
-      <a href="#" aria-label="Telegram (ссылка будет добавлена позже)">Telegram</a>
-      <a href="#" aria-label="WhatsApp (ссылка будет добавлена позже)">WhatsApp</a>
-      <a href="#" aria-label="VK (ссылка будет добавлена позже)">VK</a>
     </div>
   </aside>
 
@@ -585,9 +593,11 @@
     </div>
   </footer>
   <script>
-        const modalOverlay = document.getElementById('contact-modal-overlay');
+    const modalOverlay = document.getElementById('contact-modal-overlay');
+    const requestModalOverlay = document.getElementById('request-modal-overlay');
     const closeModalButton = document.getElementById('close-modal');
-    const triggers = document.querySelectorAll('.js-contact-trigger');
+    const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
+    const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
     const leadForm = document.querySelector('.lead-form');
     const formStatus = document.getElementById('form-status');
     const submitButton = leadForm.querySelector('button[type=\"submit\"]');
@@ -612,7 +622,14 @@
       clearFormStatus();
     };
 
-    triggers.forEach((button) => {
+    startCheckTriggers.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        openModal();
+      });
+    });
+
+    leaveRequestTriggers.forEach((button) => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
         openModal();

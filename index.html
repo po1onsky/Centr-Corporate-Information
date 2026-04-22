@@ -247,6 +247,25 @@
       background: linear-gradient(160deg, rgba(29, 120, 255, 0.2), rgba(5, 12, 26, 0.6));
     }
 
+    .cta.active-focus {
+      border-color: rgba(99, 160, 255, 0.7);
+      box-shadow: 0 20px 55px rgba(18, 87, 199, 0.35);
+      background: linear-gradient(145deg, rgba(49, 129, 255, 0.25), rgba(8, 19, 40, 0.72));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta.active-focus::after {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -20%;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,160,255,0.28), rgba(99,160,255,0));
+      pointer-events: none;
+    }
+    
     .contact-modal-overlay {
       position: fixed;
       inset: 0;
@@ -401,6 +420,18 @@
       .grid.cols-5 {
         grid-template-columns: 1fr;
       }
+      
+      .cta {
+        padding: 2rem 0.9rem;
+      }
+
+      .cta .btn {
+        width: 100%;
+      }
+
+      .cta .lead {
+        font-size: 0.95rem;
+      }
     }
 
     footer {
@@ -472,10 +503,14 @@
       <article class="card"><h3>Недостаточно для суда</h3><p>Без оформления и подтверждения такие материалы часто не принимаются как доказательство.</p></article>
       <article class="card"><h3>Нет заключения специалиста</h3><p>В большинстве случаев требуется экспертное подтверждение достоверности данных.</p></article>
     </div>
+    </div>
+  </section>
 
-    <div class="cta" style="margin-top: 1.5rem;">
+    <section class="section" id="final-cta">
+      <div class="container">
+        <div class="cta active-focus">
       <h3>Не уверены, подойдут ли ваши материалы?</h3>
-      <p class="lead" style="margin: 0.5rem auto 1rem;">Отправьте переписку, скриншоты или описание ситуации — мы бесплатно оценим, можно ли использовать их как доказательство.</p>
+      <p class="lead" style="margin: 0.7rem auto 1.1rem;">Отправьте переписку, скриншоты или описание ситуации — мы бесплатно оценим, можно ли использовать их как доказательство.</p>
       <a href="#!" class="btn primary js-leave-request-trigger">Получить консультацию</a>
     </div>
   </div>
@@ -631,11 +666,19 @@
     </div>
   </aside>
 
+      <aside class="contact-modal-overlay" id="legal-modal-overlay" aria-live="polite">
+    <div class="contact-modal" role="dialog" aria-modal="true" aria-label="Юридическая информация">
+      <button class="close-modal" data-close-modal="legal" aria-label="Закрыть окно">✕</button>
+      <strong id="legal-modal-title">Юридический документ</strong>
+      <p id="legal-modal-text">Здесь будет ваш текст. Вы сможете заполнить его позже.</p>
+    </div>
+  </aside>
+    
   <footer>
     <div class="container row">
       <div>© 2026 НО-Фонд ЦКИ</div>
       <div>Контакты: fond.cki@mail.ru • +7 (916) 493-23-93</div>
-      <div><a href="#">Политика конфиденциальности</a> • <a href="#">Условия использования</a></div>
+      <div><a href="#!" class="js-privacy-trigger">Политика конфиденциальности</a> • <a href="#!" class="js-terms-trigger">Условия использования</a></div>
     </div>
   </footer>
 <script>
@@ -649,16 +692,19 @@
   
   const contactModalOverlay = document.getElementById('contact-modal-overlay');
   const requestModalOverlay = document.getElementById('request-modal-overlay');
-
+  const legalModalOverlay = document.getElementById('legal-modal-overlay');
+  const legalTitle = document.getElementById('legal-modal-title');
+  const legalText = document.getElementById('legal-modal-text');
+  const closeModalButtons = document.querySelectorAll('.close-modal');
   const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
   const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
-  const closeButtons = document.querySelectorAll('[data-close-modal]');
-
+  const privacyTriggers = document.querySelectorAll('.js-privacy-trigger');
+  const termsTriggers = document.querySelectorAll('.js-terms-trigger');
   const leadForm = document.querySelector('.lead-form');
   const formStatus = document.getElementById('form-status');
-  const submitButton = leadForm.querySelector('button[type="submit"]');
-  const firstInput = leadForm.querySelector('input[name="name"]');
-
+  const submitButton = leadForm.querySelector('button[type=\"submit\"]');
+  const firstInput = leadForm.querySelector('input[name=\"name\"]');
+  
   const setFormStatus = (message, type) => {
     formStatus.textContent = message;
     formStatus.className = `form-status visible ${type}`;
@@ -702,6 +748,26 @@
       openModal(requestModalOverlay);
     });
   });
+
+  const openLegalModal = (title, text) => {
+      legalTitle.textContent = title;
+      legalText.textContent = text;
+      openModal(legalModalOverlay);
+    };
+
+    privacyTriggers.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        openLegalModal('Политика конфиденциальности', 'Добавьте текст политики конфиденциальности в это окно.');
+      });
+    });
+
+    termsTriggers.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        openLegalModal('Условия использования', 'Добавьте текст условий использования в это окно.');
+      });
+    });
 
   closeButtons.forEach((button) => {
     button.addEventListener('click', () => {

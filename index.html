@@ -664,20 +664,12 @@
       </form>
     </div>
   </aside>
-
-      <aside class="contact-modal-overlay" id="legal-modal-overlay" aria-live="polite">
-    <div class="contact-modal" role="dialog" aria-modal="true" aria-label="Юридическая информация">
-      <button class="close-modal" data-close-modal="legal" aria-label="Закрыть окно">✕</button>
-      <strong id="legal-modal-title">Юридический документ</strong>
-      <p id="legal-modal-text">Здесь будет ваш текст. Вы сможете заполнить его позже.</p>
-    </div>
-  </aside>
     
   <footer>
     <div class="container row">
       <div>© 2026 НО-Фонд ЦКИ</div>
       <div>Контакты: fond.cki@mail.ru • +7 (916) 493-23-93</div>
-      <div><a href="#!" class="js-privacy-trigger">Политика конфиденциальности</a> • <a href="#!" class="js-terms-trigger">Условия использования</a></div>
+      <div><a href="privacy.html">Политика конфиденциальности</a> • <a href="terms.html">Условия использования</a></div>
     </div>
   </footer>
   <script>
@@ -688,14 +680,9 @@
 
     const contactModalOverlay = document.getElementById('contact-modal-overlay');
     const requestModalOverlay = document.getElementById('request-modal-overlay');
-    const legalModalOverlay = document.getElementById('legal-modal-overlay');
-    const legalTitle = document.getElementById('legal-modal-title');
-    const legalText = document.getElementById('legal-modal-text');
     const closeModalButtons = document.querySelectorAll('.close-modal');
     const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
     const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
-    const privacyTriggers = document.querySelectorAll('.js-privacy-trigger');
-    const termsTriggers = document.querySelectorAll('.js-terms-trigger');
     const leadForm = document.querySelector('.lead-form');
     const formStatus = document.getElementById('form-status');
     const submitButton = leadForm.querySelector('button[type=\"submit\"]');
@@ -721,7 +708,6 @@
       requestModalOverlay.classList.remove('visible');
       clearFormStatus();
     };
-    const closeLegalModal = () => legalModalOverlay.classList.remove('visible');
 
     startCheckTriggers.forEach((button) => {
       button.addEventListener('click', (event) => {
@@ -737,31 +723,10 @@
       });
     });
 
-    const openLegalModal = (title, text) => {
-      legalTitle.textContent = title;
-      legalText.textContent = text;
-      openModal(legalModalOverlay);
-    };
-
-    privacyTriggers.forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        openLegalModal('Политика конфиденциальности', 'Добавьте текст политики конфиденциальности в это окно.');
-      });
-    });
-
-    termsTriggers.forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        openLegalModal('Условия использования', 'Добавьте текст условий использования в это окно.');
-      });
-    });
-
     closeModalButtons.forEach((button) => {
       button.addEventListener('click', () => {
         if (button.dataset.closeModal === 'contact') closeContactModal();
         if (button.dataset.closeModal === 'request') closeRequestModal();
-        if (button.dataset.closeModal === 'legal') closeLegalModal();
       });
     });
 
@@ -773,15 +738,10 @@
       if (event.target === requestModalOverlay) closeRequestModal();
     });
 
-    legalModalOverlay.addEventListener('click', (event) => {
-      if (event.target === legalModalOverlay) closeLegalModal();
-    });
-
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape') return;
       if (contactModalOverlay.classList.contains('visible')) closeContactModal();
       if (requestModalOverlay.classList.contains('visible')) closeRequestModal();
-      if (legalModalOverlay.classList.contains('visible')) closeLegalModal();
     });
 
     leadForm.addEventListener('submit', async (event) => {

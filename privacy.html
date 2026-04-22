@@ -29,17 +29,19 @@ ol {
 
 ol li {
   counter-increment: item;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 0.6rem;
-  padding-left: 0;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 ol li::before {
   content: counters(item, ".") ".";
+  position: absolute;
+  left: 0;
+  width: 2.5rem;
+  text-align: right;
   color: #9cc1ff;
   font-weight: 600;
-  text-align: right;
 }
     a { color: #9cc1ff; }
     .back { display: inline-block; margin-bottom: 1rem; color: #9cc1ff; }

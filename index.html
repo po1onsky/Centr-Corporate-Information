@@ -241,7 +241,7 @@
       background: linear-gradient(160deg, rgba(29, 120, 255, 0.2), rgba(5, 12, 26, 0.6));
     }
 
-.contact-modal-overlay {
+    .contact-modal-overlay {
       position: fixed;
       inset: 0;
       display: grid;
@@ -299,7 +299,7 @@
       line-height: 1;
     }
 
-        .lead-form {
+    .lead-form {
       margin-top: 0.9rem;
       display: grid;
       gap: 0.65rem;
@@ -592,87 +592,113 @@
       <div><a href="#">Политика конфиденциальности</a> • <a href="#">Условия использования</a></div>
     </div>
   </footer>
-  <script>
-    const modalOverlay = document.getElementById('contact-modal-overlay');
-    const requestModalOverlay = document.getElementById('request-modal-overlay');
-    const closeModalButton = document.getElementById('close-modal');
-    const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
-    const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
-    const leadForm = document.querySelector('.lead-form');
-    const formStatus = document.getElementById('form-status');
-    const submitButton = leadForm.querySelector('button[type=\"submit\"]');
-    const firstInput = leadForm.querySelector('input[name=\"name\"]');
+<script>
+  const contactModalOverlay = document.getElementById('contact-modal-overlay');
+  const requestModalOverlay = document.getElementById('request-modal-overlay');
 
-    const setFormStatus = (message, type) => {
-      formStatus.textContent = message;
-      formStatus.className = `form-status visible ${type}`;
-    };
+  const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
+  const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
+  const closeButtons = document.querySelectorAll('[data-close-modal]');
 
-    const clearFormStatus = () => {
-      formStatus.textContent = '';
-      formStatus.className = 'form-status';
-    };
+  const leadForm = document.querySelector('.lead-form');
+  const formStatus = document.getElementById('form-status');
+  const submitButton = leadForm.querySelector('button[type="submit"]');
+  const firstInput = leadForm.querySelector('input[name="name"]');
 
-    const openModal = () => {
-      modalOverlay.classList.add('visible');
+  const setFormStatus = (message, type) => {
+    formStatus.textContent = message;
+    formStatus.className = `form-status visible ${type}`;
+  };
+
+  const clearFormStatus = () => {
+    formStatus.textContent = '';
+    formStatus.className = 'form-status';
+  };
+
+  const openModal = (modal) => {
+    modal.classList.add('visible');
+
+    if (modal === requestModalOverlay) {
       setTimeout(() => firstInput.focus(), 50);
-    };
-    const closeModal = () => {
-      modalOverlay.classList.remove('visible');
+    }
+  };
+
+  const closeModal = (modal) => {
+    modal.classList.remove('visible');
+
+    if (modal === requestModalOverlay) {
       clearFormStatus();
-    };
+    }
+  };
 
-    startCheckTriggers.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        openModal();
-      });
-    });
+  const closeAllModals = () => {
+    closeModal(contactModalOverlay);
+    closeModal(requestModalOverlay);
+  };
 
-    leaveRequestTriggers.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        openModal();
-      });
-    });
-
-    closeModalButton.addEventListener('click', closeModal);
-
-    modalOverlay.addEventListener('click', (event) => {
-      if (event.target === modalOverlay) closeModal();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeModal();
-    });
-
-    leadForm.addEventListener('submit', async (event) => {
+  startCheckTriggers.forEach((button) => {
+    button.addEventListener('click', (event) => {
       event.preventDefault();
-      clearFormStatus();
-      submitButton.disabled = true;
-      const initialText = submitButton.textContent;
-      submitButton.textContent = 'Отправка...';
+      openModal(contactModalOverlay);
+    });
+  });
 
-      try {
-        const response = await fetch(leadForm.action, {
-          method: 'POST',
-          body: new FormData(leadForm),
-          headers: { Accept: 'application/json' }
-        });
+  leaveRequestTriggers.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      openModal(requestModalOverlay);
+    });
+  });
 
-        if (response.ok) {
-          leadForm.reset();
-          setFormStatus('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
-        } else {
-          setFormStatus('Не удалось отправить заявку. Проверьте поля и попробуйте снова.', 'error');
-        }
-      } catch {
-        setFormStatus('Ошибка сети. Попробуйте отправить форму чуть позже.', 'error');
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = initialText;
+  closeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const type = button.dataset.closeModal;
+      if (type === 'contact') closeModal(contactModalOverlay);
+      if (type === 'request') closeModal(requestModalOverlay);
+    });
+  });
+
+  [contactModalOverlay, requestModalOverlay].forEach((overlay) => {
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        closeModal(overlay);
       }
     });
-  </script>
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAllModals();
+    }
+  });
+
+  leadForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    clearFormStatus();
+    submitButton.disabled = true;
+    const initialText = submitButton.textContent;
+    submitButton.textContent = 'Отправка...';
+
+    try {
+      const response = await fetch(leadForm.action, {
+        method: 'POST',
+        body: new FormData(leadForm),
+        headers: { Accept: 'application/json' }
+      });
+
+      if (response.ok) {
+        leadForm.reset();
+        setFormStatus('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
+      } else {
+        setFormStatus('Не удалось отправить заявку. Проверьте поля и попробуйте снова.', 'error');
+      }
+    } catch {
+      setFormStatus('Ошибка сети. Попробуйте отправить форму чуть позже.', 'error');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = initialText;
+    }
+  });
+</script>
 </body>
 </html>

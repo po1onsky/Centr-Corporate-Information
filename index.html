@@ -632,6 +632,14 @@
     </div>
   </footer>
 <script>
+    if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+  });
+  
   const contactModalOverlay = document.getElementById('contact-modal-overlay');
   const requestModalOverlay = document.getElementById('request-modal-overlay');
 
@@ -662,18 +670,11 @@
     }
   };
 
-  const closeModal = (modal) => {
-    modal.classList.remove('visible');
-
-    if (modal === requestModalOverlay) {
+    const closeContactModal = () => contactModalOverlay.classList.remove('visible');
+    const closeRequestModal = () => {
+      requestModalOverlay.classList.remove('visible');
       clearFormStatus();
-    }
-  };
-
-  const closeAllModals = () => {
-    closeModal(contactModalOverlay);
-    closeModal(requestModalOverlay);
-  };
+    };
 
   startCheckTriggers.forEach((button) => {
     button.addEventListener('click', (event) => {

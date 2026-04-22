@@ -57,9 +57,21 @@ body {
       margin: 0 auto;
     }
 
-    .section {
-      padding: 4.2rem 0;
-    }
+.section {
+  padding: 4.8rem 0;
+  position: relative;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.06), transparent 22%),
+    radial-gradient(circle at 80% 10%, rgba(147, 197, 253, 0.04), transparent 18%);
+  opacity: 0.9;
+}
 
 .tag {
   display: inline-flex;
@@ -113,16 +125,36 @@ p.lead {
   position: relative;
 }
 
-.hero .container {
+.hero {
+  padding: 6.8rem 0 5.4rem;
   position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.22), transparent 65%);
+  filter: blur(10px);
+  pointer-events: none;
 }
 
 .hero::after {
   content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  left: -120px;
+  bottom: -140px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(147,197,253,0.12), transparent 65%);
+  filter: blur(14px);
+  pointer-events: none;
 }
 
     .hero h1,
@@ -226,15 +258,17 @@ p.lead {
 }
 
 .card .icon {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 3rem;
+  height: 3rem;
   display: grid;
   place-items: center;
-  border-radius: 14px;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(147, 197, 253, 0.12);
-  margin-bottom: 0.9rem;
-  font-size: 1.2rem;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(59,130,246,0.16), rgba(59,130,246,0.06));
+  border: 1px solid rgba(147, 197, 253, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 8px 18px rgba(37, 99, 235, 0.12);
 }
 
 .card h3 {
@@ -345,13 +379,32 @@ ul.clean li::before {
   line-height: 1.7;
 }
 
-    .cta {
-      text-align: center;
-      padding: 3rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: linear-gradient(160deg, rgba(29, 120, 255, 0.2), rgba(5, 12, 26, 0.6));
-    }
+.cta {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 3.2rem 1.2rem;
+  border: 1px solid rgba(173, 190, 255, 0.18);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(59,130,246,0.14), rgba(255,255,255,0.03)),
+    rgba(255,255,255,0.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 20px 60px rgba(4, 13, 31, 0.32);
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,160,255,0.22), transparent 65%);
+  pointer-events: none;
+}
 
     .cta.active-focus {
       border-color: rgba(99, 160, 255, 0.7);

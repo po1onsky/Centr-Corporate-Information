@@ -506,7 +506,7 @@
     </div>
   </section>
 
-    <section class="section" id="final-cta">
+    <section class="section" id="lead-cta">
       <div class="container">
         <div class="cta active-focus">
       <h3>Не уверены, подойдут ли ваши материалы?</h3>
@@ -610,7 +610,6 @@
           <p>Скриншоты переписки могут быть признаны доказательством, однако сами по себе они обладают ограниченной доказательственной силой, поскольку легко поддаются редактированию. Для придания им юридической значимости требуется их фиксация с соблюдением процессуальных требований: с указанием устройства, времени, условий получения, а также, с участием специалиста.</p>
         </details>
         <details>
-        <details>
           <summary>Можно ли использовать страницу сайта как доказательство?</summary>
           <p>Да, страница сайта может использоваться как доказательство, если ее содержание зафиксировано корректно и можно подтвердить дату, время и источник информации. Обычная ссылка на сайт или простой скриншот обычно недостаточны без дополнительного оформления и подтверждения подлинности.</p>
         </details>
@@ -681,75 +680,64 @@
       <div><a href="#!" class="js-privacy-trigger">Политика конфиденциальности</a> • <a href="#!" class="js-terms-trigger">Условия использования</a></div>
     </div>
   </footer>
-<script>
-    if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
+  <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', () => {
+      if (!window.location.hash) window.scrollTo(0, 0);
+    });
 
-  window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
-  });
-  
-  const contactModalOverlay = document.getElementById('contact-modal-overlay');
-  const requestModalOverlay = document.getElementById('request-modal-overlay');
-  const legalModalOverlay = document.getElementById('legal-modal-overlay');
-  const legalTitle = document.getElementById('legal-modal-title');
-  const legalText = document.getElementById('legal-modal-text');
-  const closeModalButtons = document.querySelectorAll('.close-modal');
-  const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
-  const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
-  const privacyTriggers = document.querySelectorAll('.js-privacy-trigger');
-  const termsTriggers = document.querySelectorAll('.js-terms-trigger');
-  const leadForm = document.querySelector('.lead-form');
-  const formStatus = document.getElementById('form-status');
-  const submitButton = leadForm.querySelector('button[type=\"submit\"]');
-  const firstInput = leadForm.querySelector('input[name=\"name\"]');
-  
-  const setFormStatus = (message, type) => {
-    formStatus.textContent = message;
-    formStatus.className = `form-status visible ${type}`;
-  };
+    const contactModalOverlay = document.getElementById('contact-modal-overlay');
+    const requestModalOverlay = document.getElementById('request-modal-overlay');
+    const legalModalOverlay = document.getElementById('legal-modal-overlay');
+    const legalTitle = document.getElementById('legal-modal-title');
+    const legalText = document.getElementById('legal-modal-text');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    const startCheckTriggers = document.querySelectorAll('.js-start-check-trigger');
+    const leaveRequestTriggers = document.querySelectorAll('.js-leave-request-trigger');
+    const privacyTriggers = document.querySelectorAll('.js-privacy-trigger');
+    const termsTriggers = document.querySelectorAll('.js-terms-trigger');
+    const leadForm = document.querySelector('.lead-form');
+    const formStatus = document.getElementById('form-status');
+    const submitButton = leadForm.querySelector('button[type=\"submit\"]');
+    const firstInput = leadForm.querySelector('input[name=\"name\"]');
 
-  const clearFormStatus = () => {
-    formStatus.textContent = '';
-    formStatus.className = 'form-status';
-  };
+    const setFormStatus = (message, type) => {
+      formStatus.textContent = message;
+      formStatus.className = `form-status visible ${type}`;
+    };
 
-  const openModal = (modal) => {
-    modal.classList.add('visible');
+    const clearFormStatus = () => {
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+    };
 
-    if (modal === requestModalOverlay) {
-      setTimeout(() => firstInput.focus(), 50);
-    }
-  };
+    const openModal = (overlay, focusElement) => {
+      overlay.classList.add('visible');
+      if (focusElement) setTimeout(() => focusElement.focus(), 50);
+    };
 
-  const closeModal = (modal) => {
-    modal.classList.remove('visible');
-    if (modal === requestModalOverlay) {
+    const closeContactModal = () => contactModalOverlay.classList.remove('visible');
+    const closeRequestModal = () => {
+      requestModalOverlay.classList.remove('visible');
       clearFormStatus();
-    }
-  };
+    };
+    const closeLegalModal = () => legalModalOverlay.classList.remove('visible');
 
-  const closeAllModals = () => {
-    closeModal(contactModalOverlay);
-    closeModal(requestModalOverlay);
-  };
-
-  startCheckTriggers.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      openModal(contactModalOverlay);
+    startCheckTriggers.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        openModal(contactModalOverlay);
+      });
     });
-  });
 
-  leaveRequestTriggers.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      openModal(requestModalOverlay);
+    leaveRequestTriggers.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        openModal(requestModalOverlay, firstInput);
+      });
     });
-  });
 
-  const openLegalModal = (title, text) => {
+    const openLegalModal = (title, text) => {
       legalTitle.textContent = title;
       legalText.textContent = text;
       openModal(legalModalOverlay);
@@ -769,55 +757,60 @@
       });
     });
 
-  closeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const type = button.dataset.closeModal;
-      if (type === 'contact') closeModal(contactModalOverlay);
-      if (type === 'request') closeModal(requestModalOverlay);
-    });
-  });
-
-  [contactModalOverlay, requestModalOverlay].forEach((overlay) => {
-    overlay.addEventListener('click', (event) => {
-      if (event.target === overlay) {
-        closeModal(overlay);
-      }
-    });
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeAllModals();
-    }
-  });
-
-  leadForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    clearFormStatus();
-    submitButton.disabled = true;
-    const initialText = submitButton.textContent;
-    submitButton.textContent = 'Отправка...';
-
-    try {
-      const response = await fetch(leadForm.action, {
-        method: 'POST',
-        body: new FormData(leadForm),
-        headers: { Accept: 'application/json' }
+    closeModalButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.closeModal === 'contact') closeContactModal();
+        if (button.dataset.closeModal === 'request') closeRequestModal();
+        if (button.dataset.closeModal === 'legal') closeLegalModal();
       });
+    });
 
-      if (response.ok) {
-        leadForm.reset();
-        setFormStatus('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
-      } else {
-        setFormStatus('Не удалось отправить заявку. Проверьте поля и попробуйте снова.', 'error');
+    contactModalOverlay.addEventListener('click', (event) => {
+      if (event.target === contactModalOverlay) closeContactModal();
+    });
+
+    requestModalOverlay.addEventListener('click', (event) => {
+      if (event.target === requestModalOverlay) closeRequestModal();
+    });
+
+    legalModalOverlay.addEventListener('click', (event) => {
+      if (event.target === legalModalOverlay) closeLegalModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      if (contactModalOverlay.classList.contains('visible')) closeContactModal();
+      if (requestModalOverlay.classList.contains('visible')) closeRequestModal();
+      if (legalModalOverlay.classList.contains('visible')) closeLegalModal();
+    });
+
+    leadForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearFormStatus();
+      submitButton.disabled = true;
+      const initialText = submitButton.textContent;
+      submitButton.textContent = 'Отправка...';
+
+      try {
+        const response = await fetch(leadForm.action, {
+          method: 'POST',
+          body: new FormData(leadForm),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (response.ok) {
+          leadForm.reset();
+          setFormStatus('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
+        } else {
+          setFormStatus('Не удалось отправить заявку. Проверьте поля и попробуйте снова.', 'error');
+        }
+      } catch {
+        setFormStatus('Ошибка сети. Попробуйте отправить форму чуть позже.', 'error');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = initialText;
       }
-    } catch {
-      setFormStatus('Ошибка сети. Попробуйте отправить форму чуть позже.', 'error');
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = initialText;
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>

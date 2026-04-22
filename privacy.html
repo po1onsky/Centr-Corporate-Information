@@ -16,14 +16,46 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif; }
     body { background: radial-gradient(circle at 20% -10%, #1a2e52 0, #0b1220 45%), var(--bg); color: var(--text); line-height: 1.65; }
-    .container { width: min(100% - 2rem, var(--maxw)); margin: 0 auto; padding: 2.5rem 0; }
-    .card { background: rgba(22, 35, 61, 0.78); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; }
-    h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.8rem; }
+    .container { width: min(100% - 2rem, var(--maxw)); margin: 0 auto; padding: 3rem 0 2.5rem; }
+    h1 {font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 1rem; text-align: center; letter-spacing: -0.02em; }
     h2 { margin: 1rem 0 0.5rem; font-size: 1.1rem; }
-    p, li { color: var(--muted); }
-    ul { padding-left: 1.2rem; }
+    p { color: var(--muted); }
+    ol {
+  counter-reset: item;
+  list-style: none;
+  padding-left: 0;
+}
+
+ol li {
+  counter-increment: item;
+  margin-bottom: 0.5rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+ol li::before {
+  content: counters(item, ".") ".";
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
     a { color: #9cc1ff; }
     .back { display: inline-block; margin-bottom: 1rem; color: #9cc1ff; }
+
+    .subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+        .card {
+  background: rgba(22, 35, 61, 0.78);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.6rem;
+  backdrop-filter: blur(10px);
+}
   </style>
 </head>
 <body>
@@ -31,10 +63,16 @@
     <a class="back" href="index.html">← Вернуться на главную</a>
     <section class="card">
       <h1>Политика конфиденциальности</h1>
-      <p>Это шаблон страницы политики конфиденциальности. Замените текст на актуальную юридическую редакцию вашей компании.</p>
-      <h2>1. Какие данные мы собираем</h2>
-      <ul>
-        <li>Контактные данные из формы заявки (имя, email, компания, сообщение).</li>
+      <p class="subtitle">Актуально на 2026 год</p>
+      <p>Настоящая Политика конфиденциальности (далее — Политика) определяет порядок обработки и защиты персональной информации о Пользователях, которую 
+        НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ-ФОНД "ЦЕНТР КОРПОРАТИВНОЙ ИНФОРМАЦИИ" ИНН 5258054088 (далее — Оператор), может получить от лиц, оформивших электронную заявку 
+        и/или заполнивших форму обратной связи на сайте https://www.cci.ru/, либо использовавших иные программные продукты и/или сервисы Оператора, либо обратившихся 
+        лично или посредством электронной почты по вопросам обеспечения доказательств в сети интернет, оказания юридических или иных услуг.
+        Перед использованием программных продуктов и/или сервисов Оператора, пожалуйста, ознакомьтесь с условиями настоящей Политики конфиденциальности.</p>
+     <ol>
+      <li>ОБЩИЕ ПОЛОЖЕНИЯ<li>
+      <ol>
+        <li>Персональные данные обрабатываются в соответствии с Федеральным законом «О персональных данных» №152-ФЗ.</li>
         <li>Технические данные о взаимодействии с сайтом (IP, браузер, cookies — при наличии).</li>
       </ul>
       <h2>2. Цели обработки</h2>
